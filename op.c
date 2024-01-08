@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * handle_file - opens a file and read it
+ * handle_file - opens a file and read
  * @file_name: the file namepath
  */
 void handle_file(char *file_name)
@@ -46,14 +46,12 @@ int split(char *line, int line_number, int sp_line)
 		exit(EXIT_FAILURE);
 	}
 
-	// Split the line into opcode and value using the specified delimiter
 	opcode = strtok(line, delim);
 	if (opcode == NULL)
 		return (sp_line);
 
 	value = strtok(NULL, delim);
 
-	// Call the appropriate function based on the opcode and update the sp_line
 	fun_found(opcode, value, line_number, sp_line);
 
 	return (sp_line);
