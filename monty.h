@@ -37,16 +37,16 @@ typedef struct instruction_s
 } instruction_t;
 
 extern stack_t *head;
-typedef void(op_func)(stack_t *, unsigned int);
+typedef void(op_cmd)(stack_t **, unsigned int);
 
 void handle_file(char *file_name);
 int split(char *line, int line_number, int sp_line);
 void fun_found(char *opcode, char *value, int line_number, int sp_line);
-void check_op(op_func func, char *op, char *value, int line_number, int format);
+void check_op(op_cmd cmd, char *op, char *value, int line_number, int sp_line);
 stack_t *create_node(int n);
 void free_nodes(void);
 void add_node(stack_t **new_node);
-void _push(stack_t **new_node, unsigned int line_number);
+void _push(stack_t **new_node, __attribute__((unused)) unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
 void _pint(stack_t **stack, unsigned int line_number);
 void _pop(stack_t **stack, unsigned int line_number);
