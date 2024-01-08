@@ -41,7 +41,6 @@ void check_op(op_func func, char *op, char *value, int line_number, int sp_line)
  * add_to_stack - Adds a node to the stack.
  * @new_node: Pointer to the new node.
  * @line_number:unuseful variable in this function.
- * Return: void.
  */
 void _push(stack_t **new_node, __attribute__((unused)) unsigned int line_number)
 {
