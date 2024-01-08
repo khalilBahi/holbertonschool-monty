@@ -1,25 +1,31 @@
 #include "monty.h"
 /**
- * check_op - Calls the required function.
- * @func: Pointer to the function that is about to be called.
- * @op: string representing the opcode.
- * @value: string representing a numeric value.
- * @line_number: line numeber for the instruction.
- * @sp_line: sp_line specifier. If 0 Nodes will be entered as a stack.
+ * check_op - Calls the required function
+ * @func: Pointer to the function that is about to be called
+ * @op: string representing the opcode
+ * @value: string representing a numeric value
+ * @line_number: line numeber for the instruction
+ * @sp_line: sp_line specifier. If 0 Nodes will be entered as a stack
  */
-void check_op(op_func func, char *op, char *value, int line_number, int sp_line)
+void check_op(op_cmd cmd, char *op, char *value, int line_number, int sp_line)
 {
 	stack_t *node;
-	int i;
+	int i, val;
 
-	if (strcmp(op, "push") == 0) // If the operation is "push"
+	val = 1;
+	if (strcmp(op, "push") == 0)
 	{
-		if (value == NULL) // Error handling if value is not provided
+		if (value != NULL && value[0] == '-')
+		{
+			value += 1;
+			val = -1;
+		}
+		if (value == NULL)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
 			exit(EXIT_FAILURE);
 		}
-		for (i = 0; value[i] != '\0'; i++) // Validate if the value is an integer
+		for (i = 0; value[i] != '\0'; i++)
 		{
 			if (isdigit(value[i]) == 0)
 			{
@@ -27,14 +33,14 @@ void check_op(op_func func, char *op, char *value, int line_number, int sp_line)
 				exit(EXIT_FAILURE);
 			}
 		}
-		node = create_node(atoi(value)); // Create node with integer value
+		node = create_node(atoi(value));
 		if (sp_line == 0)
-			func(&node, line_number); // Call function with node pointer
+			cmd(&node, line_number);
 		if (sp_line == 1)
-			add_node(&node); // Add node to queue
+			add_node(&node);
 	}
-	else // If the operation is not "push"
-		func(&head, line_number);
+	else
+		cmd(&head, line_number);
 }
 
 /**
