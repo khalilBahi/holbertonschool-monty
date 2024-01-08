@@ -33,7 +33,7 @@ void check_op(op_cmd cmd, char *op, char *value, int line_number, int sp_line)
 				exit(EXIT_FAILURE);
 			}
 		}
-		node = create_node(atoi(value));
+		node = create_node(atoi(value) * val);
 		if (sp_line == 0)
 			cmd(&node, line_number);
 		if (sp_line == 1)
